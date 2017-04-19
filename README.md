@@ -1,13 +1,22 @@
 # UnityInvoker
 
-_Unity Invoker_ is a small library that lets you create Unity processes (in order to do batch processing, builds, etc) easily and without the pain it usually brings.
+_Unity Invoker_ is a small library that lets you create Unity processes (in order to do batch processing, builds, etc) easily.
 
 ----------------
 
  - [Installation & Usage](#installation--usage)
- - [API](#api)
+ - [Simple, fluent API](#link-simple-fluent-api)
  - Notes:
    [Error handling](#error-handling), [Changing Unity's executable path](#changing-unitys-executable-path), [Unity activation](#unity-activation)
+
+```typescript
+import { invokeHeadlessUnity } from '@mitm/unityinvoker';
+
+await invokeHeadlessUnity()
+    .projectPath(path)
+    .executeMethod('MyEditorScript.Run')
+    .run(message => console.log(message)); // that's it
+```
 
 ----------------
 
@@ -26,9 +35,85 @@ Install it via the npm registry:
 yarn add @mitm/unityinvoker
 ```
 
-## :link: API
+## :link: Simple, fluent API
 
-To do.
+The API has (almost) an 1:1 mapping with Unity's [Command Line Interface options](https://docs.unity3d.com/Manual/CommandLineArguments.html), meaning that you can refer to these docs and translate the option names into methods... _except for a few cases where Unity's CLI really sucks (sorry)_:
+
+ - The incoherently-named options with a dash like `-force-clamped` are obviously camelized: `forceClamped()` ;
+ - Some options were merged into a simple method, ie. `-force-gles32` becomes `useRenderer(RendererType.OpenGLES, 32)` ;
+ - Same as before, options like `-buildLinux32Player` and variants are merged in: `buildLinuxPlayer(LinuxPlayerArch.x86, '/path')` (same goes for the other OSes).
+ - `-disable-assembly-updater` got two methods: `disableAssemblyUpdater()` and `disableAssemblyUpdaterFor('assembly1.dll', 'assembly2.dll')`.
+
+If you are using an IDE that supports TypeScript declarations, you'll have intellisense and documentation on the methods.
+
+### `invokeUnity()`
+
+The API has two entry points, this one launches a normal Unity instance by default (ie. not in batch mode):
+
+```typescript
+import { invokeUnity } from '@mitm/unityinvoker';
+
+// Use run() to launch Unity (breaks the fluent chain by returning a Promise)
+await invokeUnity().run();
+
+// You probably always want to tell Unity which project to open:
+await invokeUnity().projectPath('/path/to/the/project').run();
+
+// You can pass custom options too:
+await invokeUnity({
+    'my-custom-option': 'value'
+}).withOptions({ 'or-using-withOptions': true }).run();
+
+// You can watch Unity's log in real time, but you have to tell Unity to not use it's famous Editor.log file:
+await invokeUnity().logFile(null).run(message => console.log(message));
+```
+
+### `invokeHeadlessUnity()`
+
+This entry point is probably the one you're looking for, it provides an Unity instance with `.logFile(null).batchmode().noGraphics().quit()`.
+
+```typescript
+import {
+    invokeHeadlessUnity,
+    LinuxPlayerArch, OSXPlayerArch, WindowsPlayerArch,
+    RendererType
+} from '@mitm/unityinvoker';
+
+// No need for logFile(null) to have realtime logs anymore:
+await invokeHeadlessUnity().run(message => console.log(message));
+
+// All methods (except batchmode, logFile, noGraphics, quit, that are enabled in headless mode)
+await invokeHeadlessUnity()
+    .withOptions({ 'my-option': true })
+    .buildLinuxPlayer(LinuxPlayerArch.Universal, '/path/to/project')
+    .buildOSXPlayer(OSXPlayerArch.Universal, '/path/to/project')
+    .buildTarget('linux64')
+    .buildWindowsPlayer(WindowsPlayerArch.x64, '/path/to/project')
+    .cleanedLogFile()
+    .createProject('/path/to/project')
+    .editorTestsCategories(...categories)
+    .editorTestsFilter(...filteredTestsNames)
+    .editorTestsResultFile('/path/to/file')
+    .executeMethod('MyEditorScript.Run')
+    .exportPackage({
+        folderPaths: ['Project/Folder1', 'Project/Folder2'],
+        packageFilePath: '/path/to/my.unitypackage'
+    })
+    .useRenderer(RendererType.OpenGLES, 32)
+    .forceClamped()
+    .forceFree()
+    .importPackage('/path/to/my.unitypackage')
+    .password('pa$$w0rd')
+    .projectPath('/path/to/the/project/to/open')
+    .returnLicense()
+    .runEditorTests()
+    .serial('MY-SE-RI-AL')
+    .silentCrashes()
+    .username('me@me.me')
+    .disableAssemblyUpdater()
+    .disableAssemblyUpdaterFor('Some/Assembly.dll', 'Another/Assembly.dll')
+    .run(message => console.log(message));
+```
 
 ## :bulb: Notes
 
