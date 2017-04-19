@@ -22,7 +22,11 @@
   "homepage": "https://github.com/mitmadness/UnityInvoker#readme",
   "devDependencies": {
     "@types/node": "^7.0.12",
+    "@types/pify": "^0.0.28",
     "tslint": "^5.1.0",
     "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "pify": "^2.3.0"
   }
 }
