@@ -1,6 +1,6 @@
 {
   "name": "@mitm/unityinvoker",
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantic-release",
   "description": "Node.js library to invoke Unity's CLI without headaches",
   "author": "Morgan Touverey Quilling <mtouverey@methodinthemadness.eu>",
   "license": "MIT",
@@ -10,7 +10,8 @@
     "build": "yarn lint && tsc",
     "watch": "tsc -w",
     "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post",
-    "lint": "tslint src/**/*.ts"
+    "test": "mocha dist/test/**/*.js",
+    "lint": "tslint src/**/*.ts test/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -21,13 +22,15 @@
   },
   "homepage": "https://github.com/mitmadness/UnityInvoker#readme",
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.12",
     "@types/pify": "^0.0.28",
+    "semantic-release": "^6.3.2",
     "tslint": "^5.1.0",
-    "typescript": "^2.2.2",
-    "semantic-release": "^6.3.2"
+    "typescript": "^2.2.2"
   },
   "dependencies": {
+    "mocha": "^3.2.0",
     "pify": "^2.3.0"
   }
 }
