@@ -132,7 +132,7 @@ export class UnityProcess {
      * Create an empty project at the given path.
      */
     public createProject(projectPath: string): this {
-        this.processOptions.projectPath = projectPath;
+        this.processOptions.createProject = projectPath;
 
         return this;
     }
