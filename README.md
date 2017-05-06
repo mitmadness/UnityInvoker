@@ -1,4 +1,4 @@
-# UnityInvoker [![npm version](https://img.shields.io/npm/v/@mitm/unityinvoker.svg?style=flat-square)](https://www.npmjs.com/package/@mitm/unityinvoker) ![license](https://img.shields.io/github/license/mitmadness/UnityInvoker.svg?style=flat-square) [![Travis Build](https://img.shields.io/travis/mitmadness/UnityInvoker.svg?style=flat-square)](https://travis-ci.org/mitmadness/UnityInvoker)
+# UnityInvoker [![npm version](https://img.shields.io/npm/v/@mitm/unityinvoker.svg?style=flat-square)](https://www.npmjs.com/package/@mitm/unityinvoker) ![license](https://img.shields.io/github/license/mitmadness/UnityInvoker.svg?style=flat-square) [![Travis Build](https://img.shields.io/travis/mitmadness/UnityInvoker.svg?style=flat-square)](https://travis-ci.org/mitmadness/UnityInvoker) ![npm total downloads](https://img.shields.io/npm/dt/@mitm/unityinvoker.svg?style=flat-square)
 
 _Unity Invoker_ is a small library that lets you create Unity processes (in order to do batch processing, builds, etc) easily.
 
