@@ -18,6 +18,10 @@ await invokeHeadlessUnity()
     .run(message => console.log(message)); // that's it
 ```
 
+*:point_right: See also: [@mitm/chuck](https://github.com/mitmadness/chuck), a fully-featured webservice that builds asset bundles.*
+
+*:point_right: See also: [@mitm/assetbundlecompiler](https://github.com/mitmadness/AssetBundleCompiler), fluent JavaScript API to create AssetBundles from any files.*
+
 ----------------
 
 ## :package: Installation & Usage
