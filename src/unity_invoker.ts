@@ -13,10 +13,10 @@ export async function runUnityProcess(options: IUnityOptions, logger: SimpleLogg
 
     //=> Spawn Unity process
     const unityProcess = spawn(await getUnityPath(), argv);
-    unityProcess.on('error', function(err) {
+    unityProcess.on('error', async (err) => {
         logger('Error spawning Unity process: ' + err);
-      });
-
+    });
+    
     //=> Watch process' stdout to log in real time, and keep the complete output in case of crash
     let stdoutAggregator = '';
     function stdoutHandler(buffer: Buffer) {
