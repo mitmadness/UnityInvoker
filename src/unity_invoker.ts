@@ -8,11 +8,22 @@ import { IUnityOptions } from './unity_cli_options';
 import { getUnityPath } from './unity_finder';
 
 export async function runUnityProcess(options: IUnityOptions, logger: SimpleLogger): Promise<string> {
+
+    //=> Check if the project path exists.
+    if (!!options.projectPath)
+    {
+        await fs.promises.readdir(options.projectPath);
+    }
+
+    //=> Check if unity executable exists.
+    const unityPath = await getUnityPath();
+    await fs.promises.access(unityPath);
+
     //=> Generating an argv array from the arguments object
     const argv = toArgv(options);
 
     //=> Spawn Unity process
-    const unityProcess = spawn(await getUnityPath(), argv);
+    const unityProcess = spawn(unityPath, argv);
 
     //=> Watch process' stdout to log in real time, and keep the complete output in case of crash
     let stdoutAggregator = '';
