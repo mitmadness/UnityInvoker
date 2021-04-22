@@ -4,6 +4,15 @@ export type BuildTarget =
     'win32' | 'win64' | 'osx' | 'linux' | 'linux64' | 'ios' | 'android' | 'web' | 'webstreamed' |
     'webgl' | 'xboxone' | 'ps4' | 'psp2' | 'wsaplayer' | 'tizen' | 'samsungtv' | string;
 
+/**
+ * When and how the stack trace should be logged by the Editor.
+ * - None: Don't log any stack trace.
+ * - Script Only: Log a stack trace for Debug.Log calls.
+ * - Full: Log a complete stacktrace for Debug.Log and other kind of calls.
+ */
+export type StackTraceLogType =
+    'None' | 'Script Only' | 'Full' | string;
+
 export interface IUnityOptions {
     [customOption: string]: Flag | string | string[] | undefined;
 
@@ -94,6 +103,8 @@ export interface IUnityOptions {
     serial?: string;
 
     'silent-crashes'?: Flag;
+
+    stackTraceLogType?: StackTraceLogType | string;
 
     username?: string;
 

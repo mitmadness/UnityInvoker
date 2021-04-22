@@ -1,6 +1,7 @@
 import { noopLogger, SimpleLogger } from './logger';
-import { BuildTarget, IUnityOptions } from './unity_cli_options';
+import { BuildTarget, IUnityOptions, StackTraceLogType } from './unity_cli_options';
 import { runUnityProcess } from './unity_invoker';
+import { log } from "util";
 
 export enum LinuxPlayerArch { x86, x64, Universal }
 
@@ -335,6 +336,15 @@ export class UnityProcess {
      */
     public silentCrashes(enabled: boolean = true): this {
         this.processOptions['silent-crashes'] = enabled;
+
+        return this;
+    }
+
+    /**
+     * Defines when the stack trace should be logged.
+     */
+    public stackTraceLogType(logType: StackTraceLogType): this {
+        this.processOptions.stackTraceLogType = logType;
 
         return this;
     }
