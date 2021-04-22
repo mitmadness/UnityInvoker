@@ -246,7 +246,7 @@ export class UnityProcess {
      * Specify where the Editor or Windows/Linux/OSX standalone log file are written.
      * Pass null to make UnityInvoker catch Unity's logs.
      */
-    public logFile(logFilePath: string|null): this {
+    public logFile(logFilePath: string | null): this {
         this.processOptions.logFile = logFilePath === null ? true : logFilePath;
 
         return this;

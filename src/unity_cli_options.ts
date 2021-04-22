@@ -1,11 +1,11 @@
 export type Flag = boolean;
 
 export type BuildTarget =
-    'win32'|'win64'|'osx'|'linux'|'linux64'|'ios'|'android'|'web'|'webstreamed'|
-    'webgl'|'xboxone'|'ps4'|'psp2'|'wsaplayer'|'tizen'|'samsungtv'|string;
+    'win32' | 'win64' | 'osx' | 'linux' | 'linux64' | 'ios' | 'android' | 'web' | 'webstreamed' |
+    'webgl' | 'xboxone' | 'ps4' | 'psp2' | 'wsaplayer' | 'tizen' | 'samsungtv' | string;
 
 export interface IUnityOptions {
-    [customOption: string]: Flag|string|string[]|undefined;
+    [customOption: string]: Flag | string | string[] | undefined;
 
     batchmode?: Flag;
 
@@ -21,7 +21,7 @@ export interface IUnityOptions {
 
     buildOSXUniversalPlayer?: string;
 
-    buildTarget?: BuildTarget|string;
+    buildTarget?: BuildTarget | string;
 
     buildWindowsPlayer?: string;
 
@@ -77,7 +77,7 @@ export interface IUnityOptions {
 
     importPackage?: string;
 
-    logFile?: string|Flag;
+    logFile?: string | Flag;
 
     nographics?: Flag;
 
@@ -97,5 +97,5 @@ export interface IUnityOptions {
 
     username?: string;
 
-    'disable-assembly-updater'?: Flag|string[];
+    'disable-assembly-updater'?: Flag | string[];
 }
