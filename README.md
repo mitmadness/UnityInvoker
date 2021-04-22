@@ -68,8 +68,9 @@ await invokeUnity({
     'my-custom-option': 'value'
 }).withOptions({ 'or-using-withOptions': true }).run();
 
-// You can watch Unity's log in real time, but you have to tell Unity to not use it's famous Editor.log file:
-await invokeUnity().logFile(null).run(message => console.log(message));
+// You can watch Unity's log in real time, but you have to tell Unity to not use 
+// it's famous Editor.log file by using '-' as logFile value:
+await invokeUnity().logFile('-').run(message => console.log(message));
 ```
 
 ### `invokeHeadlessUnity()`
@@ -83,7 +84,7 @@ import {
     RendererType
 } from '@mitm/unityinvoker';
 
-// No need for logFile(null) to have realtime logs anymore:
+// No need for logFile('-') to have realtime logs anymore:
 await invokeHeadlessUnity().run(message => console.log(message));
 
 // All methods (except batchmode, logFile, noGraphics, quit, that are enabled in headless mode)
