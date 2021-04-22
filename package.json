@@ -10,7 +10,7 @@
     "build": "yarn lint && tsc",
     "watch": "tsc -w",
     "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post",
-    "test": "mocha dist/test/**/*.js",
+    "test": "node dist/test/index.js",
     "lint": "tslint \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "repository": {
@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/mitmadness/UnityInvoker#readme",
   "devDependencies": {
-    "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.12",
     "@types/pify": "^0.0.28",
     "semantic-release": "^6.3.2",
@@ -30,7 +29,6 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "mocha": "^3.2.0",
     "pify": "^2.3.0"
   }
 }
